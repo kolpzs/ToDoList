@@ -30,7 +30,7 @@ public class GrupoEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
-    private UserEntity users;
+    private UserEntity user;
 
     @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"grupo"})
