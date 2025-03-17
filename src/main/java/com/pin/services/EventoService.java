@@ -30,8 +30,8 @@ public class EventoService {
         return eventoRepository.save(evento);
     }
 
-    public String delete(EventoEntity evento) {
-        eventoRepository.delete(evento);
+    public String delete(Long id) {
+        eventoRepository.deleteById(id);
         return "Evento deleted";
     }
 }
