@@ -32,7 +32,7 @@ public class GrupoEntity {
     @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
     private UserEntity users;
 
-    @OneToMany(mappedBy = "grupo")
-    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
-    private List<GrupoEntity> itens;
+    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"grupo"})
+    private List<ItemEntity> itens;
 }

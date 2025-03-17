@@ -29,6 +29,9 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String role;
+
     @Min(0)
     @Max(3)
     @Column(nullable = false, columnDefinition = "int default 0")

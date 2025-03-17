@@ -40,4 +40,5 @@ public class ItemEntity {
     @JoinColumn(name = "grupo_id")
     @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
     private GrupoEntity grupo;
+
 }
