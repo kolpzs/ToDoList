@@ -26,6 +26,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public List<List<UserEntity>> findAll() {
         List<UserEntity> total = userRepository.findAll();
         List<List<UserEntity>> separados = new ArrayList<>();

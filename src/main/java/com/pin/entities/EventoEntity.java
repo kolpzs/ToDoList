@@ -38,6 +38,6 @@ public class EventoEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "equipes"})
     private UserEntity user;
 }

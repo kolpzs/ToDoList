@@ -1,6 +1,7 @@
 package com.pin.services;
 
 import com.pin.entities.GrupoEntity;
+import com.pin.entities.UserEntity;
 import com.pin.repositories.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,10 @@ public class GrupoService {
         }
 
         return separados;
+    }
+
+    public List<UserEntity> listAllUsers() {
+
     }
 
     public GrupoEntity update(GrupoEntity grupo) {

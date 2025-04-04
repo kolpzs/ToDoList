@@ -38,6 +38,14 @@ public class UserEntity {
     private int tentativas;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "users"})
     private List<GrupoEntity> grupos;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "users"})
+    private List<ItemEntity> itens;
+
+    @ManyToMany(mappedBy = "users")
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "equipes"})
+    private List<EventoEntity> eventos;
 }

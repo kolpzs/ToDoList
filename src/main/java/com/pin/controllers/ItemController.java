@@ -33,10 +33,28 @@ public class ItemController {
         }
     }
 
-    @GetMapping("/findAll")
-    public ResponseEntity<String> findAll() {
+    @GetMapping("/findAll20")
+    public ResponseEntity<String> findAll20(@RequestParam Long id) {
         try {
-            return new ResponseEntity<>(String.valueOf(itemService.findAll()), HttpStatus.OK);
+            return new ResponseEntity<>(String.valueOf(itemService.findAll20(id)), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(String.valueOf(e), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findAllUnMarked")
+    public ResponseEntity<String> findAllUnMarked(@RequestParam Long grupo_id) {
+        try {
+            return new ResponseEntity<>(String.valueOf(itemService.findAllUnMarked(grupo_id)), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(String.valueOf(e), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/favorite")
+    public ResponseEntity<String> favorite(@RequestParam Long id) {
+        try {
+            return new ResponseEntity<>(String.valueOf(itemService.favorite(id)), HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(String.valueOf(e), HttpStatus.BAD_REQUEST);
         }

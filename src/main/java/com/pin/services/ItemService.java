@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ItemService {
@@ -22,8 +23,37 @@ public class ItemService {
         return itemRepository.findById(id).orElseThrow(() -> new RuntimeException("Item not found"));
     }
 
-    public List<List<ItemEntity>> findAll() {
+    public String favorite(Long id) {
+        ItemEntity item = findById(id);
+        item.setFavorito(true);
+
+        return item.getId() + " favorited";
+    }
+
+    public List<ItemEntity> findAllUnMarked(Long id) {
+        List<ItemEntity> total = findAllGroup(id);
+        List<ItemEntity> list = new ArrayList<>();
+        for (ItemEntity item : total) {
+            if (!item.isFeita()) {
+                list.add(item);
+            }
+        }
+        return list;
+    }
+
+    public List<ItemEntity> findAllGroup(Long id) {
         List<ItemEntity> total = itemRepository.findAll();
+        List<ItemEntity> list = new ArrayList<>();
+        for (ItemEntity item : total) {
+            if (Objects.equals(item.getGrupo().getId(), id)) {
+                list.add(item);
+            }
+        }
+        return list;
+    }
+
+    public List<List<ItemEntity>> findAll20(Long id) {
+        List<ItemEntity> total = findAllGroup(id);
         List<List<ItemEntity>> separados = new ArrayList<>();
 
         for (int i = 0; i < total.size(); i += 20) {

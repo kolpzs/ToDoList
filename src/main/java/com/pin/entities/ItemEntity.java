@@ -37,8 +37,12 @@ public class ItemEntity {
     private boolean feita;
 
     @ManyToOne
-    @JoinColumn(name = "grupo_id")
-    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
-    private GrupoEntity grupo;
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "users"})
+    private UserEntity user;
 
+    @ManyToOne
+    @JoinColumn(name = "grupo_id")
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "users"})
+    private GrupoEntity grupo;
 }

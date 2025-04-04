@@ -33,6 +33,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/findByUsername")
+    public ResponseEntity<String> findByUsername(@RequestParam String username) {
+        try {
+            return new ResponseEntity<>(String.valueOf(userService.findByUsername(username)), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(String.valueOf(e), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/findAll")
     public ResponseEntity<String> findAll() {
         try {

@@ -29,10 +29,15 @@ public class GrupoEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos"})
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "equipes"})
     private UserEntity user;
 
     @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"grupo"})
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "equipes"})
     private List<ItemEntity> itens;
+
+    @ManyToOne
+    @JoinColumn(name = "equipe_id")
+    @JsonIgnoreProperties({"users", "grupos", "itens", "eventos", "equipes"})
+    private EquipeEntity equipe;
 }
