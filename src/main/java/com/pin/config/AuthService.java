@@ -1,7 +1,8 @@
 package com.pin.config;
 
 import com.pin.entities.UserEntity;
-import com.pin.repositories.UserRepository;
+import com.pin.exception.UserNotFoundException;
+import com.pin.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,18 +10,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public String authenticate(String username, String password) {
-        UserEntity user = userRepository.findByUsername(username);
-
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return JwtUtil.generateToken(username, user.getRole());
+        try {
+            UserEntity user = userService.findByUsername(username);
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return JwtUtil.generateToken(username, user.getRole());
+            } else {
+                throw new RuntimeException("Credenciais inválidas");
+            }
+        } catch (UserNotFoundException e) {
+            throw new RuntimeException("Credenciais inválidas");
         }
-
-        throw new RuntimeException("Credenciais inválidas");
     }
 }
